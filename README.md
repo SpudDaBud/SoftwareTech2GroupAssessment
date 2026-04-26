@@ -1,5 +1,5 @@
 # SoftwareTech2GroupAssessment
-The group assessment with Both u3261492, u3314336 and u3285412
+The group assessment with Both u3261492, u3314336 and u3285413
 
 Project Title: DSA Explorer and Visualiser App
 1. Project Overview
