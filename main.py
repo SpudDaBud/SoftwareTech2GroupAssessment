@@ -5,6 +5,7 @@ import phaseTwoPartThree_VSA
 import phaseTwoPartOne_LLV
 import phaseTwoPartTwo_BSTV
 import phaseOne
+import phaseOneStackVisualiser
 
 pygame.init()
 
@@ -90,7 +91,7 @@ def data_structures_module():
                     choice = menu_items[selected]
 
                     if choice == "Stack Visualization (press enter)":
-                        stack_visualization(screen, font)
+                        phaseOneStackVisualiser.run_stack()
 
                     elif choice == "Queue Visualization (press enter)":
                         phaseOne.run_queue()
