@@ -7,6 +7,10 @@ import phaseTwoPartTwo_BSTV
 import phaseOne
 import phaseOneStackVisualiser
 import PhaseThreeGrid
+import PhaseThreeHeap
+import PhaseThreePath
+
+
 
 pygame.init()
 
@@ -35,6 +39,7 @@ def main_menu():
         "Graphs": pygame.Rect(300, 310, 200, 50),
         "Heap": pygame.Rect(300, 390, 200, 50),
         "Puzzles": pygame.Rect(300, 470, 200, 50),
+        "Dyanmic Puzzle": pygame.Rect(300, 550, 200, 50)
     }
 
     for text, rect in buttons.items():
@@ -121,12 +126,13 @@ def graphs_module():
 
 def heap_module():
     # Heap insertion and extraction visualization
-    pass
+    PhaseThreeHeap.main() 
 
 
 def puzzles_module():
     PhaseThreeGrid.main()
-
+def dynamic_module(): 
+    PhaseThreePath.main() 
 
 def main():
     running = True
@@ -152,12 +158,18 @@ def main():
                 data_structures_module()
             elif current_module == "Sorting":
                 sorting_module()
-            elif current_module == "Graphs":
-                graphs_module()
-            elif current_module == "Heap":
+                elif current_module == "Heap":
+                w, h = 600, 400
+                screen = pygame.display.set_mode((w, h))
                 heap_module()
             elif current_module == "Puzzles":
+                w, h = 600, 1000
+                screen = pygame.display.set_mode((w, h))
                 puzzles_module()
+            elif current_module == "Dynamic Puzzle": 
+                w, h = 600, 800
+                screen = pygame.display.set_mode((w, h))
+                dynamic_module()
 
             current_module = None
 
