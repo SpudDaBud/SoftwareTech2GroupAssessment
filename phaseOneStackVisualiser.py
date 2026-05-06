@@ -97,9 +97,5 @@ def stack_visualization(screen, font):
         clock.tick(30)
 
 
-def run_stack():
-    stack_visualization(screen, FONT)
-
-
 if __name__ == "__main__":
-    run_stack()
+    stack_visualization(screen, FONT)

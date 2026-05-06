@@ -247,8 +247,5 @@ def main():
         clock.tick(1)
     pygame.quit()
 
-def run_bst():
-    main()
-
 if __name__ == "__main__":
-    run_bst()
+    main()

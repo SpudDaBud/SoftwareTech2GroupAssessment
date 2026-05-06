@@ -248,8 +248,5 @@ def main():
 
     pygame.quit()
 
-def run_linked_list():
-    main()
-
 if __name__ == "__main__":
-    run_linked_list()
+    main()

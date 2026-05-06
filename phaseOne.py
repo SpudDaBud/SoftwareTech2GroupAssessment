@@ -104,10 +104,5 @@ def queue_visualization(screen, font):
         pygame.display.flip()
         clock.tick(30)
 
-
-def run_queue():
-    queue_visualization(screen, FONT)
-
-
 if __name__ == "__main__":
-    run_queue()
+    queue_visualization(screen, FONT)

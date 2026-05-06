@@ -92,16 +92,16 @@ def data_structures_module():
                     choice = menu_items[selected]
 
                     if choice == "Stack Visualization (press enter)":
-                        phaseOneStackVisualiser.run_stack()
+                        phaseOneStackVisualiser.stack_visualization(screen, FONT)
 
                     elif choice == "Queue Visualization (press enter)":
-                        phaseOne.run_queue()
+                        phaseOne.queue_visualization(screen, FONT)
 
                     elif choice == "Linked List Visualization (press enter)":
-                        phaseTwoPartOne_LLV.run_linked_list()
+                        phaseTwoPartOne_LLV.main()
 
                     elif choice == "BST Visualization (press enter)":
-                        phaseTwoPartTwo_BSTV.run_bst()
+                        phaseTwoPartTwo_BSTV.main()
 
                     elif choice == "Back":
                         running = False
@@ -111,7 +111,7 @@ def data_structures_module():
 
 def sorting_module():
     # Bubble sort, selection sort, merge sort visualizations
-    phaseTwoPartThree_VSA.run_sorting()
+    phaseTwoPartThree_VSA.main()
 
 
 def graphs_module():

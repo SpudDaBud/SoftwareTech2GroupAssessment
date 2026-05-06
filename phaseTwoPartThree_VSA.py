@@ -141,8 +141,6 @@ def main():
         pygame.time.wait(2000)
     pygame.quit()
 
-def run_sorting():
-    main()
 
 if __name__ == "__main__":
-    run_sorting()
+    main()
