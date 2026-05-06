@@ -6,6 +6,7 @@ import phaseTwoPartOne_LLV
 import phaseTwoPartTwo_BSTV
 import phaseOne
 import phaseOneStackVisualiser
+import PhaseThreeGrid
 
 pygame.init()
 
@@ -124,8 +125,7 @@ def heap_module():
 
 
 def puzzles_module():
-    # Pathfinding, event simulation, DP puzzles
-    pass
+    PhaseThreeGrid.main()
 
 
 def main():
