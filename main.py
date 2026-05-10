@@ -1,20 +1,20 @@
 import pygame
 import sys
-from modules.stack import Stack, Queue
-import phaseTwoPartThree_VSA
-import phaseTwoPartOne_LLV
-import phaseTwoPartTwo_BSTV
-import phaseOne
-import phaseOneStackVisualiser
-import PhaseThreeGrid
-import PhaseThreeHeap
-import PhaseThreePath
 
+from python_files.Phase1_STACK import stack_visualization
+from python_files.Phase1_QUEUE import queue_visualization
+from python_files.Phase1_LL import linked_list_visualization
+from python_files.Phase1_BST import bst_visulaisation
 
+from python_files import phaseTwoPartThree_VSA
+
+from python_files import PhaseThreeGrid
+from python_files import PhaseThreeHeap
+from python_files import PhaseThreePath
 
 pygame.init()
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 1000, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 FONT = pygame.font.SysFont(None, 36)
 clock = pygame.time.Clock()
@@ -31,15 +31,14 @@ def draw_text(text, pos):
 
 def main_menu():
     screen.fill((200, 200, 250))
-    draw_text("Algorithm Explorer", (WIDTH // 3, 50))
+    draw_text("Algorithm Explorer", (400, 50))
 
     buttons = {
-        "Data Structures": pygame.Rect(300, 150, 200, 50),
-        "Sorting": pygame.Rect(300, 230, 200, 50),
-        "Graphs": pygame.Rect(300, 310, 200, 50),
-        "Heap": pygame.Rect(300, 390, 200, 50),
-        "Puzzles": pygame.Rect(300, 470, 200, 50),
-        "Dyanmic Puzzle": pygame.Rect(300, 550, 200, 50)
+        "Data Structures": pygame.Rect(400, 150, 200, 50),
+        "Sorting": pygame.Rect(400, 230, 200, 50),
+        "Graphs": pygame.Rect(400, 310, 200, 50),
+        "Heap": pygame.Rect(400, 390, 200, 50),
+        "Puzzles": pygame.Rect(400, 460, 200, 50)
     }
 
     for text, rect in buttons.items():
@@ -49,15 +48,10 @@ def main_menu():
     pygame.display.flip()
     return buttons
 
-
-# Placeholder functions for different modules
 def data_structures_module():
-    # Implement stack, queue, linked list, BST visualization here
+    # completed by u3285413
 
-    # STACK VIS CODE HERE:
-    
-
-    # CODE FOR RUNNING THE MENU INSIDE THE DATA_STUCTRES MODULE:
+    # code for running the menu inside data_structures_module:
     font = pygame.font.SysFont(None, 28)
 
     menu_items = [
@@ -65,7 +59,7 @@ def data_structures_module():
         "Queue Visualization (press enter)",
         "Linked List Visualization (press enter)",
         "BST Visualization (press enter)",
-        "Back",
+        "Back (press enter)",
     ]
 
     selected = 0
@@ -97,18 +91,18 @@ def data_structures_module():
                     choice = menu_items[selected]
 
                     if choice == "Stack Visualization (press enter)":
-                        phaseOneStackVisualiser.stack_visualization(screen, FONT)
+                        stack_visualization(screen, font)
 
                     elif choice == "Queue Visualization (press enter)":
-                        phaseOne.queue_visualization(screen, FONT)
+                        queue_visualization(screen, font)
 
                     elif choice == "Linked List Visualization (press enter)":
-                        phaseTwoPartOne_LLV.main()
-
+                        linked_list_visualization()
+                    
                     elif choice == "BST Visualization (press enter)":
-                        phaseTwoPartTwo_BSTV.main()
+                        bst_visulaisation(font)
 
-                    elif choice == "Back":
+                    elif choice == "Back (press enter)":
                         running = False
 
         clock.tick(30)
@@ -158,12 +152,12 @@ def main():
                 data_structures_module()
             elif current_module == "Sorting":
                 sorting_module()
-                elif current_module == "Heap":
+            elif current_module == "Heap":
                 w, h = 600, 400
                 screen = pygame.display.set_mode((w, h))
                 heap_module()
             elif current_module == "Puzzles":
-                w, h = 600, 1000
+                w, h = 800, 1000
                 screen = pygame.display.set_mode((w, h))
                 puzzles_module()
             elif current_module == "Dynamic Puzzle": 
