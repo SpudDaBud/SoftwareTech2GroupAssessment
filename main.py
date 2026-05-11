@@ -8,10 +8,10 @@ from python_files.Phase1_BST import bst_visulaisation
 
 from python_files import phaseTwoPartThree_VSA
 
-from python_files import PhaseThreeGrid
+from python_files import PhaseThreeGrid # Pathfinding Puzzle
 from python_files import PhaseThreeHeap
-from python_files import PhaseThreePath
-from python_files import PhaseThreeLoading 
+from python_files import PhaseThreePath # Dynamic Programming Puzzle
+
 
 
 pygame.init()
@@ -126,7 +126,68 @@ def heap_module():
 
 
 def puzzles_module():
-    PhaseThreeLoading.main()
+
+    # code for running the puzzles menu
+
+    global screen
+
+    font = pygame.font.SysFont(None, 28)
+
+    menu_items = [
+        "Pathfinding Puzzle (press enter)",
+        "Event Queue Simulator (NOT HERE YET)",
+        "Dynamic Programming Puzzle (press enter)",
+        "Back (press enter)"
+    ]
+
+    selected = 0
+    running = True
+
+    while running:
+        screen.fill((220, 220, 220))
+
+        for i, item in enumerate(menu_items):
+            color = (255, 0, 0) if i == selected else (0, 0, 0)
+            text = font.render(item, True, color)
+            screen.blit(text, (100, 100 + i * 40))
+
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_DOWN:
+                    selected = (selected + 1) % len(menu_items)
+
+                elif event.key == pygame.K_UP:
+                    selected = (selected - 1) % len(menu_items)
+
+                elif event.key == pygame.K_RETURN:
+                    choice = menu_items[selected]
+
+                    if choice == "Pathfinding Puzzle (press enter)":
+                        w, h = 600, 1000
+                        screen = pygame.display.set_mode((w, h))
+                        PhaseThreeGrid.main(screen, font)
+                        screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
+                    elif choice == "Event Queue Simulator (NOT HERE YET)":
+                        pass
+
+                    elif choice == "Dynamic Programming Puzzle (press enter)":
+                        w, h = 600, 800
+                        screen = pygame.display.set_mode((w, h))
+                        PhaseThreePath.main()
+                        screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
+                    elif choice == "Back (press enter)":
+                        running = False
+
+        clock.tick(30)
+    
 
 
 def main():

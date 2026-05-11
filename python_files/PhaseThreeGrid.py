@@ -23,7 +23,7 @@ inputRect = pygame.Rect(150, HEIGHT - 40, 300, 32)
 userText = ''
 
 #draws the grid of the application  
-def draw_grid(): 
+def draw_grid(screen, font): 
  
     screen.fill((255, 255, 255))
     infoText1 = FONT.render("Types: 1.obs,2.start,3.end. Please use format number, type", True, (0, 0, 0))
@@ -129,7 +129,7 @@ def create_path(start_pos, end_pos):
     return path
 
 
-def main(): 
+def main(screen, font): 
 
     global userText
     userText = ''
@@ -191,7 +191,7 @@ def main():
                 else:
                     userText += event.unicode
        
-        draw_grid() 
+        draw_grid(screen, font) 
 
 
 if __name__ == "__main__": 

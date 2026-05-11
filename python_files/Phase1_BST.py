@@ -163,7 +163,7 @@ def draw_tree(node, x, y, x_offset, nodes_pos, parent_pos=None):
 
 def bst_visulaisation(font):
     bst = BST()
-    values = [50, 30, 70, 20, 40, 60, 80]
+    values = []
     for v in values:
         bst.insert(v)
     
