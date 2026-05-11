@@ -11,6 +11,8 @@ from python_files import phaseTwoPartThree_VSA
 from python_files import PhaseThreeGrid
 from python_files import PhaseThreeHeap
 from python_files import PhaseThreePath
+from python_files import PhaseThreeLoading 
+
 
 pygame.init()
 
@@ -124,9 +126,8 @@ def heap_module():
 
 
 def puzzles_module():
-    PhaseThreeGrid.main()
-def dynamic_module(): 
-    PhaseThreePath.main() 
+    PhaseThreeLoading.main()
+
 
 def main():
     running = True
@@ -156,14 +157,11 @@ def main():
                 w, h = 600, 400
                 screen = pygame.display.set_mode((w, h))
                 heap_module()
+                screen = pygame.display.set_mode((WIDTH, HEIGHT))
             elif current_module == "Puzzles":
-                w, h = 800, 1000
-                screen = pygame.display.set_mode((w, h))
                 puzzles_module()
-            elif current_module == "Dynamic Puzzle": 
-                w, h = 600, 800
-                screen = pygame.display.set_mode((w, h))
-                dynamic_module()
+                screen = pygame.display.set_mode((WIDTH, HEIGHT))
+         
 
             current_module = None
 
