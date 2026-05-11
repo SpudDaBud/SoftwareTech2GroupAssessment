@@ -1,0 +1,18 @@
+Test conditions: 
+
+
+Test Case: 								Description: 					Expected result: 
+
+
+
+Obstacle avoidance for 							Place walls between start and end 		Path routes around obstacles 					
+dynamic and Dijkstra 		
+
+	
+
+No valid path for 
+dynamic and Dijkstra 							Completely block destination or start 		Program states that path can not be displayed 
+
+
+	
+A heap element is removed 						A specific heap element is removed 		The element is removed from the heap, and a updated heap is displayed 
