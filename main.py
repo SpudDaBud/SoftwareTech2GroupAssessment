@@ -11,6 +11,7 @@ from python_files import phaseTwoPartThree_VSA
 from python_files import PhaseThreeGrid # Pathfinding Puzzle
 from python_files import PhaseThreeHeap
 from python_files import PhaseThreePath # Dynamic Programming Puzzle
+from python_files import phaseThreeGraph # Graph Traversal Visualization
 
 
 
@@ -117,7 +118,7 @@ def sorting_module():
 
 def graphs_module():
     # BFS, DFS visualization with interactive graph
-    pass
+    phaseThreeGraph.main()
 
 
 def heap_module():
