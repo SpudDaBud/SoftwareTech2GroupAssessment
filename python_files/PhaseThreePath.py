@@ -27,7 +27,6 @@ def draw_grid(dp, highlight=None, path=None):
     text = FONT.render("Use TAB to enter data in format number, obs", True, (0, 0,0))
     screen.blit(text, (100, 700))
 
-    
     pygame.draw.rect(screen, (0, 0, 0), inputRect, 2)
     text_surface = FONT.render(userText, True, (0, 0, 0))
     screen.blit(text_surface, (inputRect.x + 5, inputRect.y + 5))
@@ -36,6 +35,7 @@ def draw_grid(dp, highlight=None, path=None):
         fullText = f"Total unique paths: {current_dp[ROWS - 1][COLS - 1]}"
         text = FONT.render(fullText, True, (0, 0, 0))
         screen.blit(text, (100, 650))
+  
     for r in range(ROWS):
         for c in range(COLS):
             rect = pygame.Rect(c * CELL_SIZE, r * CELL_SIZE, CELL_SIZE, CELL_SIZE)
@@ -60,12 +60,12 @@ def draw_grid(dp, highlight=None, path=None):
             if val is not None:
                 text = FONT.render(str(val), True, textColor)
                 screen.blit(text, text.get_rect(center=rect.center))
-
+         
     pygame.display.flip()
 #draws the menu 
 def menu(): 
     screen.fill((255, 255, 255))
-    text = FONT.render("Use TAB to enter data in format number, obs", True, (0, 0,0))
+    text = FONT.render("Use TAB to enter data in format number, obs. RCTRL to clear path's", True, (0, 0,0))
     screen.blit(text, (0, 700))
     if current_dp != None: 
         fullText =f"Total unique paths: {current_dp[ROWS - 1][COLS - 1]}"
@@ -130,7 +130,8 @@ def count_paths():
                 parent[r][c] = "L"
 
             draw_grid(dp, (r, c))
-
+            pygame.display.update()
+            pygame.time.delay(150)
 
             
     r, c = ROWS - 1, COLS - 1
@@ -170,8 +171,11 @@ def main():
 
                 elif event.key == pygame.K_BACKSPACE:
                     userText = userText[:-1]
-                
-
+                elif event.key == pygame.K_RCTRL: 
+                    current_dp = None
+                    current_path =  None 
+                    obstacles.clear() 
+                  
                 elif event.key == pygame.K_RETURN:
 
                     parts = userText.split(",")
@@ -197,13 +201,14 @@ def main():
         if current_dp is None:
             menu()
         else:
+        
             draw_grid(current_dp, path=current_path)
+          
 
      
   
         clock.tick(60)
-    pygame.quit() 
-
+  
 if __name__ == "__main__":
 
         main()
