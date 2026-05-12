@@ -101,6 +101,9 @@ def heapify_up(heap, index):
         if heap[parent][0] > heap[index][0]:
             heap[parent], heap[index] = heap[index], heap[parent]
             index = parent
+        if heap[parent][1] > heap[index][1] and heap[parent][0] == heap[index][0]: 
+            heap[parent], heap[index] = heap[index], heap[parent]
+            index = parent
         else:
             break
 
