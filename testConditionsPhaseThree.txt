@@ -11,7 +11,7 @@ dynamic and Dijkstra
 	
 
 No valid path for 
-dynamic and Dijkstra 							Completely block destination or start 		Program states that their are 0 paths.
+dynamic and Dijkstra 							Completely block destination or start 		Dynamic program states their are 0 unique paths, and Dijkstra's states that the  path is inaccessible.
 
 	
 A heap element is removed 						A specific heap element is removed 		The element is removed from the heap, and a updated heap is displayed 
