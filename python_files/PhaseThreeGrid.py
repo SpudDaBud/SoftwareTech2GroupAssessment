@@ -179,8 +179,13 @@ def main(screen, font):
                     print(end_pos)
 
                     global path
-                    path = create_path(start_pos, end_pos)
-
+                    #what animates the path 
+                    newPath = create_path(start_pos, end_pos)
+                    path.clear() 
+                    for cell in fullPath: 
+                      path.append(cell) 
+                      draw_grid() 
+                      pygame.time.wait(250)
                     print(path)
                 elif event.key == pygame.K_DELETE: 
                     path.clear() 
