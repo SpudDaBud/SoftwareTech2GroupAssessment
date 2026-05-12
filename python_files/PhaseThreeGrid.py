@@ -21,9 +21,10 @@ dump = []
 inputRect = pygame.Rect(150, HEIGHT - 40, 300, 32)
 
 userText = ''
+failedPath = False 
 
 #draws the grid of the application  
-def draw_grid(screen, font): 
+def draw_grid(): 
  
     screen.fill((255, 255, 255))
     infoText1 = FONT.render("Types: 1.obs,2.start,3.end. Please use format number, type", True, (0, 0, 0))
@@ -36,8 +37,11 @@ def draw_grid(screen, font):
     pygame.draw.rect(screen, (0, 0, 0), inputRect, 2)
     text_surface = FONT.render(userText, True, (0, 0, 0))
     screen.blit(text_surface, (inputRect.x + 5, inputRect.y + 5))
-
-
+    if failedPath != True: 
+        pass 
+    else: 
+        failedText = FONT.render("Path is inaccessible, please try again", True, (0, 0, 0)) 
+        screen.blit(failedText, (0, 600))
 
     for r in range(ROWS): 
         for c in range(COLS): 
@@ -129,9 +133,10 @@ def create_path(start_pos, end_pos):
     return path
 
 
-def main(screen, font): 
+def main(): 
 
     global userText
+    global failedPath
     userText = ''
 
     running = True 
@@ -179,24 +184,36 @@ def main(screen, font):
                     print(end_pos)
 
                     global path
-                    #what animates the path 
-                    newPath = create_path(start_pos, end_pos)
-                    path.clear() 
-                    for cell in fullPath: 
-                      path.append(cell) 
-                      draw_grid() 
-                      pygame.time.wait(250)
+                    fullPath = create_path(start_pos, end_pos)
+                    
+                    path.clear()
+                    if len(fullPath) == 0: 
+                        print("Path cannot be accessed")
+                        failedPath = True 
+                    else: 
+                        failedPath = False 
+
+
+                    for cell in fullPath:
+                        path.append(cell)
+
+                        draw_grid()
+
+                        pygame.time.wait(250)
                     print(path)
+                  
+
                 elif event.key == pygame.K_DELETE: 
                     path.clear() 
                     start.clear() 
                     end.clear() 
                     obstacles.clear()
+                    failedPath = False
 
                 else:
                     userText += event.unicode
        
-        draw_grid(screen, font) 
+        draw_grid() 
 
 
 if __name__ == "__main__": 
