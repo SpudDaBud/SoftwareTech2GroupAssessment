@@ -1,9 +1,9 @@
 import pygame
 
 
-import PhaseThreeGrid
+from python_files import PhaseThreeGrid
 
-import PhaseThreePath
+from python_files import PhaseThreePath
 
 pygame.init()
 
