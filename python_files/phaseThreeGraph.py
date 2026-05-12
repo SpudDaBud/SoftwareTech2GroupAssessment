@@ -102,7 +102,7 @@ def get_clicked_node(pos):
     return None
 
 def main():
-    draw_graph()
+    
     pygame.time.wait(1000)
     
     # Wait for user to choose between BFS and DFS
@@ -110,6 +110,7 @@ def main():
     font_large = pygame.font.SysFont(None, 32)
     bfs_button = pygame.Rect(100, 150, 150, 60)
     dfs_button = pygame.Rect(350, 150, 150, 60)
+    draw_graph()
     
     choosing_algorithm = True
     while choosing_algorithm:
