@@ -24,18 +24,23 @@ current_path = None
 #draws the application and the grid 
 def draw_grid(dp, highlight=None, path=None):
     screen.fill((255, 255, 255))
-    text = FONT.render("Use TAB to enter data in format number, obs", True, (0, 0,0))
-    screen.blit(text, (100, 700))
+    text = FONT.render("Use TAB to enter data in format number, obs. RCTRL to clear path's", True, (0, 0,0))
+    screen.blit(text, (0, 700))
 
     pygame.draw.rect(screen, (0, 0, 0), inputRect, 2)
     text_surface = FONT.render(userText, True, (0, 0, 0))
     screen.blit(text_surface, (inputRect.x + 5, inputRect.y + 5))
     #checks if dp is null, and then displays the total paths 
-    if current_dp != None:
-        fullText = f"Total unique paths: {current_dp[ROWS - 1][COLS - 1]}"
-        text = FONT.render(fullText, True, (0, 0, 0))
+    try: 
+        if len(current_dp) != 0 or current_dp != None:
+            fullText = f"Total unique paths: {current_dp[ROWS - 1][COLS - 1]}"
+            text = FONT.render(fullText, True, (0, 0, 0))
+            screen.blit(text, (100, 650))
+    except: 
+        
+        text = FONT.render("Total unique paths:  0", True, (0, 0, 0))
         screen.blit(text, (100, 650))
-  
+    
     for r in range(ROWS):
         for c in range(COLS):
             rect = pygame.Rect(c * CELL_SIZE, r * CELL_SIZE, CELL_SIZE, CELL_SIZE)
@@ -104,7 +109,7 @@ def menu():
 
 
 #counts the paths 
-def count_paths():
+def count_paths(obstacles):
     dp = [[0] * COLS for _ in range(ROWS)]
     parent = [[None] * COLS for _ in range(ROWS)]
 
@@ -192,9 +197,14 @@ def main():
 
                     userText = ""
                 elif event.key == pygame.K_TAB: 
-                    current_dp, current_path = count_paths()
-          
-                    pygame.time.wait(3000)
+                    current_dp, current_path = count_paths(obstacles)
+                    for i in range(len(current_path)):
+                        screen.fill((255, 255, 255))
+                        
+                        # draw grid with partial path
+                        draw_grid(current_dp, path=current_path[:i+1])
+                        
+                        pygame.time.wait(200)
 
                 else:
                     userText += event.unicode
