@@ -8,7 +8,7 @@ from python_files import PhaseThreeHeap
 
 pygame.init()
 #defines global and importnat varibles 
-WIDTH, HEIGHT = 600, 400
+WIDTH, HEIGHT = 1000, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 FONT = pygame.font.SysFont(None, 24)
 clock = pygame.time.Clock()
