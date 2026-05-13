@@ -25,7 +25,7 @@ userText = ''
 failedPath = False 
 
 
-#basic insertion, normal start, end and obstacles 
+#basic insertion, normal start, end and obstacles. Expeceted result: paths to 15 and stops  
 def basicPath(): 
    
     PhaseThreeGrid.start.clear()
@@ -60,7 +60,7 @@ def basicPath():
     print("Final path:", PhaseThreeGrid.path)
 
 
-#inaccessible or impossible path, blocked end 
+#inaccessible or impossible path, blocked end. Expected result:  no path is shown and shows Path is inaccessible under the grid
 def blockedEnd():
 
     PhaseThreeGrid.start.clear()
