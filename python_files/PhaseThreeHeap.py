@@ -5,14 +5,15 @@ from datetime import timedelta
 
 pygame.init()
 #defines global and importnat varibles 
-WIDTH, HEIGHT = 600, 400
+WIDTH, HEIGHT = 1000, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 FONT = pygame.font.SysFont(None, 24)
 clock = pygame.time.Clock()
 
 heap = []
 
-inputRect = pygame.Rect(150, HEIGHT - 40, 300, 32)
+inputRect = pygame.Rect(350, 560, 300, 32)
+exitButton = pygame.Rect(50, 560, 100, 32)
 userText = ''
 errorMsg = ''
 finalTime = ''
@@ -21,19 +22,26 @@ errorState = False
 def draw_menu(): 
 
     title_text = FONT.render("Welcome to the program", True, (0, 0,0))
-    screen.blit(title_text, (200, 0) )
+    screen.blit(title_text, (400, 100) )
     menu_text = FONT.render("Use TAB to load the insertions,  RCTRL to show the highest priority item and", True, (0, 0, 0))
-    screen.blit(menu_text, (0, 200))
+    screen.blit(menu_text, (200, 200))
     if errorState != True and len(errorMsg) != 0:
         errorText = FONT.render(errorMsg, True, (0, 0, 0)) 
-        screen.blit(errorText, (0, 300))
+        screen.blit(errorText, (250, 400))
     else: 
         pass 
     extra_text = FONT.render("LCTRL to delete a specific items. Format is (1, 8.00, wake up)", True, (0, 0,0))
-    screen.blit(extra_text, (0, 250))
+    screen.blit(extra_text, (275, 250))
     pygame.draw.rect(screen, (0, 0, 0), inputRect, 2)
     text_surface = FONT.render(userText, True, (0, 0, 0))
     screen.blit(text_surface, (inputRect.x + 5, inputRect.y + 5))
+
+    exitText = FONT.render("Exit", True, (0, 0, 0))
+   
+    pygame.draw.rect(screen, (0, 0, 0), exitButton,  2)
+    
+    textRect = exitText.get_rect(center=exitButton.center)
+    screen.blit(exitText, textRect)
     pygame.display.flip()
 #draws the heap 
 def draw_heap(heap, highlight_indices=None):
@@ -182,12 +190,15 @@ def main():
 
             if event.type == pygame.QUIT:
                 running = False
-
+            if event.type == pygame.MOUSEBUTTONDOWN: 
+                pos = event.pos 
+                if exitButton.collidepoint(pos): 
+                    running = False 
             if event.type == pygame.KEYDOWN:
 
                 if event.key == pygame.K_BACKSPACE:
                     userText = userText[:-1]
-
+       
                 elif event.key == pygame.K_RETURN:
                     parts = userText.split(",")
 
