@@ -157,7 +157,10 @@ def main():
                 w, h = 600, 400
                 screen = pygame.display.set_mode((w, h))
                 heap_module()
-                screen = pygame.display.set_mode((WIDTH, HEIGHT))
+            elif current_module == "Graphs":
+                graphs_module()
+                w, h = 800, 600
+                screen = pygame.display.set_mode((w, h))
             elif current_module == "Puzzles":
                 puzzles_module()
                 screen = pygame.display.set_mode((WIDTH, HEIGHT))

@@ -101,8 +101,23 @@ def get_clicked_node(pos):
             return node
     return None
 
+def wait_to_return():
+    waiting = True
+    while waiting:
+        screen.fill((240, 240, 240))
+        message = FONT.render("Traversal complete. Press ESC to return to menu.", True, (0, 0, 0))
+        screen.blit(message, (80, 20))
+        pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    waiting = False
+
+
 def main():
-    
     pygame.time.wait(1000)
     
     # Wait for user to choose between BFS and DFS
@@ -183,8 +198,8 @@ def main():
     else:
         dfs(selected_node)
     
-    pygame.time.wait(2000)
-    pygame.quit()
+    wait_to_return()
+
 
 if __name__ == "__main__":
     main()

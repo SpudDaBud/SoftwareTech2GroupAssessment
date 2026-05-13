@@ -108,12 +108,28 @@ def merge(arr, left, mid, right):
         k += 1
     draw_array(arr)
 
+def wait_for_return():
+    waiting = True
+    while waiting:
+        screen.fill((30, 30, 30))
+        message = FONT.render("Sorting complete. Press ESC to return to menu.", True, (255, 255, 255))
+        screen.blit(message, (50, 50))
+        pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    waiting = False
+
+
 def main():
     running = True
     algorithm = None
     while running:
         screen.fill((30, 30, 30))
-        instructions = FONT.render("Press B for Bubble Sort, S for Selection Sort, M for Merge Sort", True, (255, 255, 255))
+        instructions = FONT.render("Press B for Bubble, S for Selection, M for Merge, ESC to return", True, (255, 255, 255))
         screen.blit(instructions, (50, 50))
         pygame.display.flip()
         for event in pygame.event.get():
@@ -129,6 +145,8 @@ def main():
                 elif event.key == pygame.K_m:
                     algorithm = 'merge'
                     running = False
+                elif event.key == pygame.K_ESCAPE:
+                    return
     if algorithm:
         draw_array(array)
         pygame.time.wait(1000)
@@ -138,8 +156,7 @@ def main():
             selection_sort_visualize(array)
         elif algorithm == 'merge':
             merge_sort_visualize(array, 0, len(array) - 1)
-        pygame.time.wait(2000)
-    pygame.quit()
+        wait_for_return()
 
 
 if __name__ == "__main__":
