@@ -19,7 +19,7 @@ path = []
 dump = []
 
 inputRect = pygame.Rect(150, HEIGHT - 40, 300, 32)
-
+exitButton = pygame.Rect(0, HEIGHT - 40, 100, 32)
 userText = ''
 failedPath = False 
 
@@ -37,6 +37,12 @@ def draw_grid():
     pygame.draw.rect(screen, (0, 0, 0), inputRect, 2)
     text_surface = FONT.render(userText, True, (0, 0, 0))
     screen.blit(text_surface, (inputRect.x + 5, inputRect.y + 5))
+    exitText = FONT.render("Exit", True, (0, 0, 0))
+   
+    pygame.draw.rect(screen, (0, 0, 0), exitButton,  2)
+    
+    textRect = exitText.get_rect(center=exitButton.center)
+    screen.blit(exitText, textRect)
     if failedPath != True: 
         pass 
     else: 
@@ -147,6 +153,10 @@ def main():
 
             if event.type == pygame.QUIT: 
                 running = False 
+            if event.type == pygame.MOUSEBUTTONDOWN: 
+                pos = event.pos 
+                if exitButton.collidepoint(pos): 
+                    running = False 
 
             if event.type == pygame.KEYDOWN: 
 
@@ -219,7 +229,4 @@ def main():
 if __name__ == "__main__": 
     
     main()
-    print(obstacles)
-    print(start)
-    print(end)
-    print(dump)
+   
