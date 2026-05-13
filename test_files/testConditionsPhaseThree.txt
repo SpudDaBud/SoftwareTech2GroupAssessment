@@ -1,7 +1,7 @@
 Test conditions: 
 
 
-Test Case: 								Description: 					Expected result: 
+Test Case: 								     Description: 					Expected result: 
 
 
 
@@ -14,4 +14,7 @@ No valid path for
 dynamic and Dijkstra 							Completely block destination or start 		Dynamic program states their are 0 unique paths, and Dijkstra's states that the  path is inaccessible.
 
 	
-A heap element is removed 						A specific heap element is removed 		The element is removed from the heap, and a updated heap is displayed 
+heap orderng								Inserts elements into the heap with 			orders the elements by priority, then time and then orders them by when they were inserted.
+										different time and priority, same priority
+										but different time. Then elements with the same 
+										priority and time 										
