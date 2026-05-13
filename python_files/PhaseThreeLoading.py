@@ -1,8 +1,6 @@
 import pygame
 
-
 from python_files import PhaseThreeGrid
-
 from python_files import PhaseThreePath
 
 pygame.init()
@@ -27,7 +25,8 @@ def main_menu():
 
     buttons = {
         "Pathfinding Puzzles": pygame.Rect(400, 150, 270, 50), 
-        "Dynamic Puzzles": pygame.Rect(400, 230, 270, 50)
+        "Dynamic Puzzles": pygame.Rect(400, 230, 270, 50), 
+        "Exit": pygame.Rect(0, 500, 100, 50)
     }
     for text, rect in buttons.items(): 
         pygame.draw.rect(screen, (150, 150, 200), rect)
@@ -74,12 +73,11 @@ def main():
                 screen = pygame.display.set_mode((w, h))
                 dynamic_module()
                 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-
+            elif current_module == "Exit": 
+                running = False 
             current_module = None
 
         clock.tick(30)
-
-
 
 
 
