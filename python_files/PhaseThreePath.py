@@ -15,6 +15,7 @@ obstacles = {}
 path = []
 userText  = ''
 inputRect = pygame.Rect(150, HEIGHT - 40, 300, 32)
+exitButton = pygame.Rect(0, HEIGHT - 40, 100, 32)
 global current_dp
 global current_path
 current_dp = None 
@@ -30,6 +31,12 @@ def draw_grid(dp, highlight=None, path=None):
     pygame.draw.rect(screen, (0, 0, 0), inputRect, 2)
     text_surface = FONT.render(userText, True, (0, 0, 0))
     screen.blit(text_surface, (inputRect.x + 5, inputRect.y + 5))
+    exitText = FONT.render("Exit", True, (0, 0, 0))
+   
+    pygame.draw.rect(screen, (0, 0, 0), exitButton,  2)
+    
+    textRect = exitText.get_rect(center=exitButton.center)
+    screen.blit(exitText, textRect)
     #checks if dp is null, and then displays the total paths 
     try: 
         if len(current_dp) != 0 or current_dp != None:
@@ -80,6 +87,12 @@ def menu():
     pygame.draw.rect(screen, (0, 0, 0), inputRect, 2)
     text_surface = FONT.render(userText, True, (0, 0, 0))
     screen.blit(text_surface, (inputRect.x + 5, inputRect.y + 5))
+    exitText = FONT.render("Exit", True, (0, 0, 0))
+   
+    pygame.draw.rect(screen, (0, 0, 0), exitButton,  2)
+    
+    textRect = exitText.get_rect(center=exitButton.center)
+    screen.blit(exitText, textRect)
     i = 0 
     for r in range(ROWS):
         for c in range(COLS):
@@ -168,6 +181,11 @@ def main():
 
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.MOUSEBUTTONDOWN: 
+                pos = event.pos 
+                if exitButton.collidepoint(pos): 
+                   
+                    running = False
 
             elif event.type == pygame.KEYDOWN:
 
