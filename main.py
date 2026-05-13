@@ -154,13 +154,9 @@ def main():
             elif current_module == "Sorting":
                 sorting_module()
             elif current_module == "Heap":
-                w, h = 600, 400
-                screen = pygame.display.set_mode((w, h))
                 heap_module()
             elif current_module == "Graphs":
                 graphs_module()
-                w, h = 800, 600
-                screen = pygame.display.set_mode((w, h))
             elif current_module == "Puzzles":
                 puzzles_module()
                 screen = pygame.display.set_mode((WIDTH, HEIGHT))
