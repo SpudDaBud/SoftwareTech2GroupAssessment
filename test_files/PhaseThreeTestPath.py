@@ -21,7 +21,7 @@ current_path = None
 
 
 
-#basic path
+#basic path, expected result:  paths to the end and returns total unique paths:  56 
 def basicPath(): 
 
     PhaseThreePath.obstacles.clear()
@@ -35,7 +35,7 @@ def basicPath():
                         
                         pygame.time.wait(200)
     pygame.time.wait(1000)
-#blocked path
+#blocked path, can't path to the end and returns total unique paths: 0
 def blockedPath(): 
     
     PhaseThreePath.obstacles.clear()
@@ -46,7 +46,7 @@ def blockedPath():
     for i in range(len(PhaseThreePath.current_path)):
                         screen.fill((255, 255, 255))
                         
-                        # draw grid with partial path
+                        
                         PhaseThreePath.draw_grid(PhaseThreePath.current_dp, path=PhaseThreePath.current_path[:i+1])
                         
                         pygame.time.wait(200)
