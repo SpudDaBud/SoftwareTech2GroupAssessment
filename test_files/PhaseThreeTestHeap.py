@@ -26,7 +26,7 @@ errorState = False
 
 
 
-#shows what happens when priority and time are alll different 
+#shows what happens when priority and time are alll different, expected result: (1, 11.0, brush teeth), (2, 12.0, have breakfast),  (3, 10.0, wake up) 
 def basicInsertion(): 
 
     
@@ -34,7 +34,7 @@ def basicInsertion():
     for i in range(len(newHeap)): 
         PhaseThreeHeap.insert(heap, newHeap[i])
     PhaseThreeHeap.draw_heap(heap)
-#shows what happens when priority is the same  but time is different 
+#shows what happens when priority is the same  but time is different, expected result:  (1,9.0, brush teeth), (1, 11.0, wake up), (1, 14.0, have breakfast)  
 def timeInsertion(): 
     heap = [] 
     newHeap = [(1, 11.0, 'wake up'), (1, 9.0, 'brush teeth'), (1, 14.0, 'have breakfast')]
@@ -42,7 +42,7 @@ def timeInsertion():
     for i in range(len(newHeap)): 
         PhaseThreeHeap.insert(heap, newHeap[i])
     PhaseThreeHeap.draw_heap(heap)
-#shows what happens when everything is the same
+#shows what happens when everything is the same, expected result:  (1, 10.0, wake up), (1, 10.0, brush teeth), 1, 10.0, have breakfast) 
 def sameInsertion(): 
     heap = [] 
     newHeap = [(1, 10.0, 'wake up'), (1, 10.0, 'brush teeth'), (1, 10.0, 'have breakfast')]
