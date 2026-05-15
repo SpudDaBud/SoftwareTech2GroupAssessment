@@ -25,7 +25,7 @@ current_path = None
 #draws the application and the grid 
 def draw_grid(dp, highlight=None, path=None):
     screen.fill((255, 255, 255))
-    text = FONT.render("Use TAB to enter data in format number, obs. RCTRL to clear path's", True, (0, 0,0))
+    text = FONT.render("Use TAB to enter data in format number, obs. DEL to clear path's", True, (0, 0,0))
     screen.blit(text, (0, 700))
 
     pygame.draw.rect(screen, (0, 0, 0), inputRect, 2)
@@ -194,7 +194,7 @@ def main():
 
                 elif event.key == pygame.K_BACKSPACE:
                     userText = userText[:-1]
-                elif event.key == pygame.K_RCTRL: 
+                elif event.key == pygame.K_DELETE: 
                     current_dp = None
                     current_path =  None 
                     obstacles.clear() 
