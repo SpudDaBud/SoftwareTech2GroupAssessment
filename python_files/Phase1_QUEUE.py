@@ -1,3 +1,6 @@
+"""This program uses pygame to showcase the visualisation of a queue"""
+
+
 import pygame
 import sys
 
@@ -14,26 +17,33 @@ BASE_Y = HEIGHT - BLOCK_HEIGHT - 20
 
 
 class Queue:
+    """simple queue class"""
+    
     def __init__(self):
         self._data = []
 
     def push(self, val):
+        """inserts an item into the queue (enqueue)"""
         self._data.append(val)
 
     def pop(self):
+        """removes an element from the queue in FIFO order (dequeue)"""
         if not self.is_empty():
             return self._data.pop(0)
         raise IndexError("pop from empty queue")
 
     def peek(self):
+        """returns the top value of the queue without removing it"""
         if not self.is_empty():
             return self._data[0]
         raise IndexError("peek from empty queue")
 
     def is_empty(self):
+        """checks if the queue is empty"""
         return len(self._data) == 0
 
     def size(self):
+        """gets the size of the queue"""
         return len(self._data)
 
     def __repr__(self):
@@ -41,6 +51,7 @@ class Queue:
 
 
 def queue_visualization(screen, font):
+    """runs the interactive stack visualisation program using pygame"""
     queue = Queue()
     counter = 1
     running = True

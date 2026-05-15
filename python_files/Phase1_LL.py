@@ -1,3 +1,5 @@
+"""This program uses pygame to showcase a visualisation of a Linked List"""
+
 import pygame
 import sys
 
@@ -15,16 +17,21 @@ BASE_Y = HEIGHT - BLOCK_HEIGHT - 20
 
 # LL CLASSES:
 class Node:
+    """represents a single node in a LL"""
+
     def __init__(self, value):
         self.value = value
         self.next = None
 
 
 class LinkedList:
+    """a singly Linked List implemeted with common operations"""
+
     def __init__(self):
         self.head = None
 
     def append(self, value):
+        """used to add a new node with a given value to the end of the LL"""
         if not self.head:
             self.head = Node(value)
             return
@@ -35,6 +42,7 @@ class LinkedList:
         current.next = Node(value)
 
     def delete(self, value):
+        """used to delete the last value from the LL"""
         current = self.head
         prev = None
         while current:
@@ -56,44 +64,66 @@ class LinkedList:
             current = current.next
         return elems
 
-    def reverse(self):  # new funtion for reversing the LL
-        prev = None  # sets the value to ALWAYS be one step behind current
-        current = self.head  # this is the value of the currnt node
+    def reverse(self):  
+        """
+        This funtion uses iteration to reverse the LL
+
+        uses 3 pointers:
+        -prev: keeps track of the previous node (the one behind current node)
+        -current: tracks the current node being processed
+        -next_node: this is a temp value to the rest of the LL so it isn't lost
+
+        the funtion goes theough the list and reverses each nodes link until 
+        the enteire LL is reversed
+        """
+
+        prev = None  
+        current = self.head  
 
         while current:
-            next_node = (
-                current.next
-            )  # next_node is a temp value which stores the next node so we dont lose the list when reversing
-            current.next = prev  # this reverses the link
-            prev = (
-                current  # prev moves forward by 1 spot the where 'current' was before
-            )
-            current = next_node  # moves current indicator to the next node
+            next_node = current.next 
+            current.next = prev  
+            prev = current  
+            current = next_node  
 
         self.head = prev
 
-    def insert_at_position(
-        self, value, position
-    ):  # new funtion for inserting at a custom position
+    def insert_at_position(self, value, position):
+        """
+        This is a special funtion used to insert a node at a specific position in the LL
+
+        Variables:
+        -new_node: this is the value of the node the user has inserted
+        -self.head: refers to the 'head' of the LL
+        -current: current is a temp value assinged to the next node as you travel in the LL 
+        -index: this is used to keep track of current's value in the LL
+
+        the funtion begins with an 'if' statement checking if the new_node's position is at 0.
+        if the pos is 0, it takes the next node inserted by the user and makes that the 'head'
+        of the LL. 
+
+        The 'while' loop forces the current node and index values to change by 1
+
+        the 'if current' statement checks if you reached a valid node in the LL, and is responsibel for the actual insertion.
+        If you reaches a valid node, make the new_node point to the node infront, and maek the node behind new_node 
+        point to new_node
+        """
+    
         new_node = Node(value)
 
         if position == 0:
-            new_node.next = (
-                self.head
-            )  # if the position = 0, change the next node inserted to be 'first' actual node
-            self.head = new_node  # now the 'first' node becomes the new node
+            new_node.next = self.head 
+            self.head = new_node  
             return
 
         current = self.head
         index = 0
 
-        while (
-            current and index < position - 1
-        ):  # this while loop moves the 'current' node forward by 1
+        while current and index < position - 1:  
             current = current.next
             index += 1
 
-        if current:  # this code makes the inserted node point what was there before
+        if current:  
             new_node.next = current.next
             current.next = new_node
 
@@ -122,16 +152,10 @@ def linked_list_visualization():
         dx = end_pos[0] - start_pos[0]
         dy = end_pos[1] - start_pos[1]
         angle = pygame.math.Vector2(dx, dy).angle_to(pygame.math.Vector2(1, 0))
-        arrow_head = [
-            (end_pos[0] - 10, end_pos[1] - 5),
-            end_pos,
-            (end_pos[0] - 10, end_pos[1] + 5),
-        ]
+        arrow_head = [(end_pos[0] - 10, end_pos[1] - 5), end_pos, (end_pos[0] - 10, end_pos[1] + 5)]
         pygame.draw.polygon(screen, (0, 0, 0), arrow_head)
 
-    def draw_linked_list(
-        linked_list, custom_value, custom_position, highlight_index=None
-    ):
+    def draw_linked_list(linked_list, custom_value, custom_position, highlight_index=None):
         screen.fill((240, 240, 240))
         nodes = []
         current = linked_list.head
@@ -151,18 +175,21 @@ def linked_list_visualization():
         info = FONT.render(  # displays the value of the current value of the node, adn the current position
             f"Value: {custom_value}        Position: {custom_position}",
             True,  # makes the edges look smoother
-            (0, 0, 0),  # black colour
-        )
+            (0, 0, 0))  # black colour
+        
         screen.blit(info, (20, 20))
 
         controls = FONT.render(
             "Up/Down = Value    Left/Right = Position   A = Insert  D = Delete  R = Reverse \n\n Press ESC to go Back",
             True,
-            (0, 0, 0),
-        )
+            (0, 0, 0))
+        
         screen.blit(controls, (20, 50))
 
     def main():
+        """
+        This is the main funtion responsible for handling inputs and custom value sform the user
+        """
         ll = LinkedList()
 
         ll.append(1)
@@ -187,36 +214,24 @@ def linked_list_visualization():
                     if event.key == pygame.K_UP:  # chaneges the insert value up by 5
                         custom_value += 1
 
-                    elif (
-                        event.key == pygame.K_DOWN
-                    ):  # chaneges the insert value down by 5
+                    elif event.key == pygame.K_DOWN:  # chaneges the insert value down by 5
                         custom_value -= 1
 
-                    elif (
-                        event.key == pygame.K_RIGHT
-                    ):  # pressing right changes the position by 1
+                    elif event.key == pygame.K_RIGHT:  # pressing right changes the position by 1
                         custom_position += 1
 
-                    elif (
-                        event.key == pygame.K_LEFT
-                    ):  # pressing left changes the position by 1
+                    elif event.key == pygame.K_LEFT:  # pressing left changes the position by 1
                         custom_position -= 1
 
-                    # press a to add to LL
-
-                    elif event.key == pygame.K_a:
+                    elif event.key == pygame.K_a:   # press a to add to LL
                         ll.insert_at_position(custom_value, custom_position)
 
-                    # press d to remove last node
-
-                    elif event.key == pygame.K_d:
+                    elif event.key == pygame.K_d:   # press d to remove last node
                         value = ll.to_list()
                         if value:
                             ll.delete(value[-1])
 
-                    # press r to reverse LL
-
-                    elif event.key == pygame.K_r:
+                    elif event.key == pygame.K_r:   # press r to reverse LL
                         ll.reverse()
 
                     elif event.key == pygame.K_ESCAPE:

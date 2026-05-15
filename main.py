@@ -1,3 +1,7 @@
+"""
+This script uses pygame to showcase visualisations of DSA through modular prorgamming 
+"""
+
 import pygame
 import sys
 
@@ -52,6 +56,10 @@ def main_menu():
     return buttons
 
 def data_structures_module():
+    """
+    This module showcases visualisations for a Stack, 
+    Queue, Linked List, and a BST
+    """
     # completed by u3285413
 
     # code for running the menu inside data_structures_module:

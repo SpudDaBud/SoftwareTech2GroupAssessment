@@ -1,3 +1,5 @@
+"""This program uses pygame to showcase a visualisation of a Binary Search Tree"""
+
 import pygame
 import sys
 
@@ -12,6 +14,7 @@ NODE_RADIUS = 20
 
 
 class BSTNode:
+    """represents a node in the BST"""
     def __init__(self, value):
         self.value = value
         self.left = None
@@ -19,40 +22,72 @@ class BSTNode:
 
 
 class BST:
+    """this class is responsible for inserting, deleting, 
+    searching and showing all 3 orders in the BST"""
+    
     def __init__(self):
         self.root = None
 
     def insert(self, value):
+        """
+        this insert funtion uses recursion to insert nodes based on the BST ording property rule
+        """
         def _insert(node, value):
+            # Base case:
             if not node:
                 return BSTNode(value)
+            
+            # if value is less, insert to the left
             if value < node.value:
                 node.left = _insert(node.left, value)
+
+            # if value is greater, insert to the right
             elif value > node.value:
                 node.right = _insert(node.right, value)
+
             return node
 
         self.root = _insert(self.root, value)
     
     def search(self, root, target, path_list):
+        """
+        this funtion is used to search for a value in the BST, 
+        while storing the visited nodes in a list that is later used to 
+        show an animated path the search algorithm takes
+        """
         
+        # Base case - if the value is NOT in the tree, return an empty tree
         if root is None:
             return []
         
+        # 1st case: if the current node is equal to the target, add that node to path_list 
         if root.value == target:
             path_list.append(root)
             return path_list
  
+        # 2nd case: if the target is samller than the current node, go search left
         elif target < root.value:
             path_list.append(root)
             return self.search(root.left, target, path_list)
             
-
+        # 3rd case: if the target is larger than the current node, go search right  
         else:
             path_list.append(root)
             return self.search(root.right, target, path_list)
     
     def delete(self, root, key):
+        """
+        This funtion is used to delete nodes form the BST
+
+        -root.value: this is the value of the 'current' node 
+        -key: this is the target node the user enters to be deleted
+
+        this uses recursion and cases depending whether there are no children, 
+        one chlid or both children to traverse and delete the correct node in the BST
+
+        """
+
+        # Base case:
 
         if root is None:
             return 
@@ -91,9 +126,11 @@ class BST:
         return root
 
             
-
-
     def inorder(self):
+        """
+        this is the funtion to showcase inorder traversal, it works by 
+        traversing all left nodes, then to the root, then to all right nodes
+        """
         result = []
 
         def _inorder(node):
@@ -106,6 +143,10 @@ class BST:
         return result
 
     def preorder(self):
+        """
+        this is the funtion to showcase preorder traversal, it works by 
+        traversing to the root first, then to all left nodes, then to all right nodes
+        """
         result = []
 
         def _preorder(node):
@@ -118,6 +159,10 @@ class BST:
         return result
 
     def postorder(self):
+        """
+        this is the funtion to showcase postorder traversal, it works by 
+        traversing to all left nodes first, then to all right nodes, then to the root last
+        """
         result = []
 
         def _postorder(node):
@@ -138,12 +183,8 @@ def draw_node(x, y, value, highlight=False):
 
     screen.blit(text, text_rect)
 
-
-
-
 def draw_edge(start_pos, end_pos):
     pygame.draw.line(screen, (0, 0, 0), start_pos, end_pos, 3)
-
 
 def draw_tree(node, x, y, x_offset, nodes_pos, parent_pos=None):
     if node:
@@ -158,10 +199,10 @@ def draw_tree(node, x, y, x_offset, nodes_pos, parent_pos=None):
         draw_tree(node.right, x + x_offset, y + 80, x_offset // 2, nodes_pos, (x, y))
         draw_node(x, y, node.value)
 
-        
-
-
 def bst_visulaisation(font):
+    """
+    this is the main funtion that uses the logic from the BST class to acutally perfom the operations
+    """
     bst = BST()
     values = []
     for v in values:
@@ -170,23 +211,21 @@ def bst_visulaisation(font):
     back_button = pygame.Rect(10, 500, 150, 50)
 
     running = True
-    highlight_idx = 0
-    traversal_nodes = []
+
+    highlight_idx = 0 # tracks which node is currently being highlighted
+
+    traversal_nodes = [] # this list is used later to highlight nodes that have been visited
+
     mode_selected = False
     
-
     traversal_timer = 0
     traversal_delay = 700
 
     current_mode = False
 
     search_found = ""
-    user_txt = ""
+    user_txt = ""   # stores user input
     
-    
-
-
-
     while running:
         screen.fill((240, 240, 240))
 
@@ -200,6 +239,7 @@ def bst_visulaisation(font):
         controls2 = FONT.render("Press ESC to exit current mode", True, (0, 0, 0))
         screen.blit(controls2, (20, 80))
 
+        # Search Text
         if current_mode == "search":
             search_text1 = FONT.render("Search Mode is ACTIVE!", True, (0, 0, 0))
             search_text2 = FONT.render("Press BACKSPACE to delete text", True, (250, 0, 0))
@@ -210,6 +250,7 @@ def bst_visulaisation(font):
             screen.blit(search_text3, (20, 230))
             screen.blit(search_text4, (20, 280))
         
+        # Delete Text
         if current_mode == "delete":
             del_text1 = FONT.render("Delete Mode is ACTIVE!", True, (0, 0, 0))
             del_text2 = FONT.render("Press BACKSPACE to delete text", True, (250, 0, 0))
@@ -220,6 +261,7 @@ def bst_visulaisation(font):
             screen.blit(del_text3, (20, 230))
             screen.blit(del_text4, (20, 280))
         
+        # Insert Text
         if current_mode == "insert":
             ins_text1 = FONT.render("Insert Mode is ACTIVE!", True, (0, 0, 0))
             ins_text2 = FONT.render("Press BACKSPACE to delete text", True, (250, 0, 0))
@@ -230,14 +272,17 @@ def bst_visulaisation(font):
             screen.blit(ins_text3, (20, 230))
             screen.blit(ins_text4, (20, 280))
         
+        # Preorder Text
         if current_mode == "pre":
             pre_text = FONT.render("Currently showing Preorder: ", True, (50, 153, 50))                
             screen.blit(pre_text, (20, 100))
         
+        # Postorder Text
         if current_mode == "post":
             post_text = FONT.render("Currently showing Postorder: ", True, (50, 153, 50))                
             screen.blit(post_text, (20, 100))
         
+        # Inorder Text
         if current_mode == "inor":
             inor_text = FONT.render("Currently showing Inorder: ", True, (50, 153, 50))                
             screen.blit(inor_text, (20, 100))
@@ -256,15 +301,11 @@ def bst_visulaisation(font):
         nodes_pos = {}
 
         draw_tree(bst.root, WIDTH // 2, 200, 150, nodes_pos)
-        # Highlight current node in in-order traversal
+
+        # Highlight current node 
         if highlight_idx < len(traversal_nodes):
             node = traversal_nodes[highlight_idx]
             x, y = WIDTH // 2, 50
-
-            # We need to find node position (roughly)
-            # For simplicity, redraw tree and highlight the node:
-
-            
 
             def store_positions(node, x, y, x_offset, parent_pos=None):
                 if node:
@@ -305,13 +346,11 @@ def bst_visulaisation(font):
                             mode_selected = True
                             traversal_timer = pygame.time.get_ticks()
 
-                            if traversal_nodes and traversal_nodes[-1].value == target:
+                            if traversal_nodes and traversal_nodes[-1].value == target: # checks if the target was found
                                 search_found = "yes"
                             else:
                                 search_found = "no"
 
-                            
-                            
                     elif event.key == pygame.K_BACKSPACE:
                         user_txt = user_txt[:-1]
 
@@ -387,17 +426,18 @@ def bst_visulaisation(font):
         pygame.display.flip()
         clock.tick(60) 
 
-        if mode_selected and traversal_nodes:
+        # play the animation if mode_selected = True and there are nodes in traversal_nodes
+
+        if mode_selected and traversal_nodes:   
 
             current_time = pygame.time.get_ticks()
 
-            if current_time - traversal_timer > traversal_delay:
+            if current_time - traversal_timer > traversal_delay: # move to the next node every 700 milisec
 
                 traversal_timer = current_time
-
             
                 if highlight_idx < len(traversal_nodes) - 1:            
-                    highlight_idx += 1
+                    highlight_idx += 1  # highlights the next node if this condition is met
                 else:
                     mode_selected = False
 

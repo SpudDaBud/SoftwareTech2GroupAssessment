@@ -1,3 +1,5 @@
+"""This program uses pygame to showcase a visualisation of a stack"""
+
 import pygame
 import sys
 
@@ -14,26 +16,33 @@ BASE_Y = HEIGHT - BLOCK_HEIGHT - 20
 
 
 class Stack:
+    """Simple stack class"""
+
     def __init__(self):
         self._data = []
 
     def push(self, val):
+        """Add item to top of stack"""
         self._data.append(val)
 
     def pop(self):
+        """remove item from top of stack"""
         if not self.is_empty():
             return self._data.pop()
         raise IndexError("pop from empty stack")
 
     def peek(self):
+        """Returns the top value without removing it"""
         if not self.is_empty():
             return self._data[-1]
         raise IndexError("peek from empty stack")
 
     def is_empty(self):
+        """checks if the stack is empty"""
         return len(self._data) == 0
 
     def size(self):
+        """gets the size of the stack"""
         return len(self._data)
 
     def __repr__(self):
@@ -41,6 +50,7 @@ class Stack:
 
 
 def stack_visualization(screen, font):
+    """runs the interactive stack visualisation program using pygame"""
 
     stack = Stack()
     counter = 1
