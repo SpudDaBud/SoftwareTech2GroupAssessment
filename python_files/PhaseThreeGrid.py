@@ -45,6 +45,9 @@ def draw_grid():
     screen.blit(exitText, textRect)
     if failedPath != True: 
         pass 
+    elif failedPath == True and len(start) == 0 or len(end) == 0: 
+        failedText = FONT.render("Please input a start and end", True, (0, 0,0))
+        screen.blit(failedText, (0, 600))
     else: 
         failedText = FONT.render("Path is inaccessible, please try again", True, (0, 0, 0)) 
         screen.blit(failedText, (0, 600))
@@ -186,37 +189,44 @@ def main():
                     userText = ''
 
                 elif event.key == pygame.K_TAB: 
-
-                    start_pos = next(iter(start))
-                    end_pos = next(iter(end))
-
-                    print(start_pos)
-                    print(end_pos)
-
-                    global path
-                    fullPath = create_path(start_pos, end_pos)
-                    
-                    path.clear()
-                    if len(fullPath) == 0: 
-                        print("Path cannot be accessed")
-                        failedPath = True 
+                    if len(start) !=  0 and len(end) != 0: 
+                        global start_pos, end_pos
+                        start_pos = next(iter(start))
+                        end_pos = next(iter(end))
                     else: 
-                        failedPath = False 
+                        failedPath = True 
+                    try: 
+                        print(start_pos)
+                        print(end_pos)
+
+                        global path
+                        fullPath = create_path(start_pos, end_pos)
+                        
+                        path.clear()
+                        if len(fullPath) == 0: 
+                
+                            print("Path cannot be accessed")
+                            failedPath = True 
+                        else: 
+                            failedPath = False 
 
 
-                    for cell in fullPath:
-                        path.append(cell)
+                        for cell in fullPath:
+                            path.append(cell)
 
-                        draw_grid()
+                            draw_grid()
 
-                        pygame.time.wait(250)
-                    print(path)
-                  
+                            pygame.time.wait(250)
+                        print(path)
+                    except: 
+                        pass 
 
                 elif event.key == pygame.K_DELETE: 
                     path.clear() 
                     start.clear() 
                     end.clear() 
+                    start_pos = None 
+                    end_pos = None
                     obstacles.clear()
                     failedPath = False
 
