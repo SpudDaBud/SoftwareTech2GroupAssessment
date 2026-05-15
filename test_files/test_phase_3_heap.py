@@ -30,14 +30,14 @@ errorState = False
 def basicInsertion(): 
 
     
-    newHeap = [(3, 10.0, 'wake up'), (1, 11.0, 'brush teeth'), (2, 12.0, 'have breakfast')]
+    newHeap = [(3, timedelta(hours=10.0), 'wake up'), (1, timedelta(hours =11.0), 'brush teeth'), (2, timedelta(hours=12.0), 'have breakfast')]
     for i in range(len(newHeap)): 
         PhaseThreeHeap.insert(heap, newHeap[i])
     PhaseThreeHeap.draw_heap(heap)
 #shows what happens when priority is the same  but time is different, expected result:  (1,9.0, brush teeth), (1, 11.0, wake up), (1, 14.0, have breakfast)  
 def timeInsertion(): 
     heap = [] 
-    newHeap = [(1, 11.0, 'wake up'), (1, 9.0, 'brush teeth'), (1, 14.0, 'have breakfast')]
+    newHeap = [(1, timedelta(hours=11.0), 'wake up'), (1, timedelta(hours=9.00), 'brush teeth'), (1, timedelta(hours=14.00), 'have breakfast')]
     
     for i in range(len(newHeap)): 
         PhaseThreeHeap.insert(heap, newHeap[i])
@@ -45,7 +45,7 @@ def timeInsertion():
 #shows what happens when everything is the same, expected result:  (1, 10.0, wake up), (1, 10.0, brush teeth), 1, 10.0, have breakfast) 
 def sameInsertion(): 
     heap = [] 
-    newHeap = [(1, 10.0, 'wake up'), (1, 10.0, 'brush teeth'), (1, 10.0, 'have breakfast')]
+    newHeap = [(1, timedelta(hours =10.0), 'wake up'), (1, timedelta(hours=10.0), 'brush teeth'), (1, timedelta(hours=10.0), 'have breakfast')]
     
     for i in range(len(newHeap)): 
         PhaseThreeHeap.insert(heap, newHeap[i])
