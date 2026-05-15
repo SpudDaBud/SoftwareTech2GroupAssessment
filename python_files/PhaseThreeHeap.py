@@ -109,7 +109,7 @@ def heapify_up(heap, index):
         if heap[parent][0] > heap[index][0]:
             heap[parent], heap[index] = heap[index], heap[parent]
             index = parent
-        if heap[parent][1] < heap[index][1] and heap[parent][0] == heap[index][0]: 
+        if heap[parent][1] > heap[index][1] and heap[parent][0] == heap[index][0]: 
             heap[parent], heap[index] = heap[index], heap[parent]
             index = parent
         else:
@@ -161,9 +161,10 @@ def showMin(heap):
         return
 
     screen.fill((255, 255, 255))
+   
     priority, time,  desc = heap[0]
 
-    fullText = str(priority) + " " + time + " " + desc
+    fullText = str(priority) + " " + str(time) + " " + desc
     text = FONT.render(fullText, True, (0, 0, 0))
     screen.blit(text, (WIDTH // 2 - text.get_width() // 2, HEIGHT // 2))
     pygame.display.flip()
@@ -213,7 +214,7 @@ def main():
                             global finalTime
                             
                             time = float(parts[1])
-                            finalTime = str(timedelta(hours=time))
+                            finalTime = timedelta(hours=time)
                         except: 
                             
                             errorState = True 
